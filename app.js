@@ -1,23 +1,22 @@
-const express = require("express");
-const app = express();
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
-app.listen(3000, function () {
-    console.log("Servern är igång på localhost:3000");
-})
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
-app.get("/json", function (req, res) {
-    let users = [{
-        userName: "tove",
-        password: "test",
-        id: 1
-    }, {
-        userName: "esty",
-        password: "esteban",
-        id: 2
-    }, {
-        userName: "hund",
-        password: "hunden",
-        id: 3
-    }]
-    res.json(users)
-})
+var app = express();
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: false
+}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+module.exports = app;
