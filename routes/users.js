@@ -35,24 +35,25 @@ let answer;
 //Checks if the user is in the user array and responds with error if not, else ok
 router.post("/newuser", function (req, res) {
 
-  const userFromLogin = listOfusers.find(user => user.userName == req.body.fName);
+  const userNameFromLogin = listOfusers.find(user => user.userName == req.body.fName);
+  const passwordFromLogin = listOfusers.find(user => user.password == req.body.password)
 
-  if (userFromLogin) {
+  if (userNameFromLogin && passwordFromLogin) {
 
-    if (userFromLogin.userName == req.body.fName) {
-      console.log(("Det funkar?").green);
+    if (userNameFromLogin.userName == req.body.fName && passwordFromLogin.password == req.body.password) {
+
       answer = {
-
         "result": "ok"
       }
       return res.json(answer)
 
     }
   } else {
-    console.log(("det funkar ej".blue));
+
     answer = {
       "result": "error"
     }
+
     res.json(answer)
   }
 })
