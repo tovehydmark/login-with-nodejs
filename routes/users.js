@@ -32,15 +32,13 @@ let listOfusers = [{
 
 let answer;
 
-//Testa att förenkla, dela upp find och sen kör 
-
+//Checks if the user is in the user array and responds with error if not, else ok
 router.post("/newuser", function (req, res) {
 
-  // console.log(req.body);
-
   const userFromLogin = listOfusers.find(user => user.userName == req.body.fName);
-  // console.log(JSON.stringify(userFromLogin).blue);
+
   if (userFromLogin) {
+
     if (userFromLogin.userName == req.body.fName) {
       console.log(("Det funkar?").green);
       answer = {
@@ -57,55 +55,8 @@ router.post("/newuser", function (req, res) {
     }
     res.json(answer)
   }
-
-  // listOfusers.find((userLALA) => {
-
-  //   console.log("userLALA" + JSON.stringify(userLALA).yellow);
-
-  //   if (userLALA.userName == req.body.fName) {
-  //     console.log("userLALA.userName " + JSON.stringify(userLALA.userName).red); //När jag har ett "=" så blir userLALA.userName samma som jag skrivit i mitt inputfält. varför??? Och när jag har två hoppar den in i else-satsen??
-
-  //     console.log("req.body.fName: " + JSON.stringify(req.body.fName).green); //This is our user from userinput
-  //     answer = {
-  //       "result": "ok"
-  //     }
-  //     return res.json(answer)
-
-
-  //   } else {
-  //     answer = {
-  //       "result": "error"
-  //     }
-  //     res.json(answer)
-
-
-  //   }
-  // })
-
 })
-
-
 
 
 router.post
 module.exports = router;
-
-
-// for (let i = 0; i < users.length; i++) {
-//   console.log("Namn från fält: " + req.body.fName);
-
-//   console.log("users innan if".green + JSON.stringify(users[i].userName).green)
-
-//   //Loopar bara två gånger när jag har if-satsen, annars 4..why
-//   if (users[i].userName = req.body.fName) {
-//     console.log("users " + JSON.stringify(users[i].userName).red);
-//     answer = {
-//       "result": "ok"
-//     }
-
-//   } else if (users[i].userName != req.body.fName) {
-//     answer = {
-//       "result": "error"
-//     }
-//   }
-// }
