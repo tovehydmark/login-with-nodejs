@@ -42,6 +42,9 @@ let listOfUsers = [{
 
 let answer;
 
+//Remember HÄMTA ÄNDRA SPARA when working with the json files
+//puts the users.json file data to /allusers
+
 router.get("/allusers", (req, res) => {
 
   fs.readFile("users.json", (err, data) => {
