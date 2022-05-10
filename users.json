@@ -1,0 +1,23 @@
+  [{
+    "userName": "johan",
+    "password": "test",
+    "id": 1,
+    "isLoggedin": false
+  },
+  {
+    "userName": "esty",
+    "password": "esteban",
+    "id": 2,
+    "isLoggedin": false
+  }, {
+    "userName": "hund",
+    "password": "hunden",
+    "id": 3,
+    "isLoggedin": false
+  }, {
+    "userName": "häst",
+    "password": "hästen",
+    "id": 4,
+    "isLoggedin": false
+  }
+]
