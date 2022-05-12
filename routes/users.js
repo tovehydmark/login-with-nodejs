@@ -67,21 +67,31 @@ router.post("/login", function (req, res) {
 
 router.post("/createuser", function (req, res) {
 
-
-  const newUser = {
-    "userName": req.userName,
-    "password": req.password,
-    "id":
-  }
-
   fs.readFile("users.json", (err, data) => {
 
     if (err) {
       console.log("Någonting gick fel, error : " + err);
     }
 
-    let users = JSON.parse(data);
+    const users = JSON.parse(data);
 
+    const newUser = {
+      "userName": req.body.userName,
+      "password": req.body.password,
+      "id": rand.generate(),
+      "isLoggedin": false
+    }
+
+    users.push(newUser);
+
+    fs.writeFile("users.json", JSON.stringify(users, null, 2), function (err) {
+      if (err) {
+        console.log(err);
+      }
+    })
+
+    res.send("Success! new user with username:  is created!")
+    return;
   })
 
 })
