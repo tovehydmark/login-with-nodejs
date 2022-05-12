@@ -64,7 +64,7 @@ router.post("/login", function (req, res) {
 })
 
 
-
+//Receives the new user from the front end and updates the users.json file
 router.post("/createuser", function (req, res) {
 
   fs.readFile("users.json", (err, data) => {
