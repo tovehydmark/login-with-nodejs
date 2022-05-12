@@ -60,35 +60,47 @@ router.get("/allusers", (req, res) => {
 
 
 
-//Checks if the user is in the user array and responds with error if not, else ok
+//Checks if the user is in users.json and responds with error if not, else ok
 router.post("/newuser", function (req, res) {
 
-  const userFromLogin = listOfUsers.find(user => {
-    return user.userName == req.body.fName && user.password == req.body.password && user.id
-  });
-
-
-  if (userFromLogin) {
-
-    //Sends user-id to the client so it can be stored in LS to keep the right user loggedin
-    answer = {
-      "result": "ok",
-      "id": userFromLogin.id
+  fs.readFile("users.json", (err, data) => {
+    if (err) {
+      console.log("Någonting gick fel, error : " + err);
     }
 
-    //Changes the value of users loggedin status
-    userFromLogin.isLoggedin = true
+    let users = JSON.parse(data);
 
-    return res.json(answer)
+    const userFromLogin = users.find(user => {
+      return user.userName == req.body.fName && user.password == req.body.password && user.id
+    });
 
-  } else {
 
-    answer = {
-      "result": "error"
+    if (userFromLogin) {
+
+      //Sends user-id to the client so it can be stored in LS to keep the right user loggedin
+      userFromLogin.isLoggedin = true
+
+
+      answer = {
+        "result": "ok",
+        "id": userFromLogin.id,
+        "isLoggedin": userFromLogin.isLoggedin,
+        "userName": userFromLogin.userName
+      }
+
+
+      return res.json(answer)
+
+    } else {
+
+      answer = {
+        "result": "error"
+      }
+
+      res.json(answer)
     }
 
-    res.json(answer)
-  }
+  })
 })
 
 
